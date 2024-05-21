@@ -1,10 +1,10 @@
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
+
 import * as schema from "../db/schema";
 
-const sql = neon(process.env.DATABASE_URL!);
-
+const sql = neon(process.env.DATABASE_URL!); 
 // @ts-ignore
 const db = drizzle(sql, { schema });
 
@@ -19,6 +19,8 @@ const main = async () => {
     await db.delete(schema.challenges);
     await db.delete(schema.challengeOptions);
     await db.delete(schema.challengeProgress);
+    // await db.delete(schema.userSubscription);
+
 
     await db.insert(schema.courses).values([
       {
@@ -28,21 +30,16 @@ const main = async () => {
       },
       {
         id: 2,
-        title: "French",
-        imageSrc: "/fr.svg",
-      },
-      {
-        id: 3,
         title: "Italian",
         imageSrc: "/it.svg",
       },
       {
-        id: 4,
-        title: "Japan",
-        imageSrc: "/jp.svg",
+        id: 3,
+        title: "French",
+        imageSrc: "/fr.svg",
       },
       {
-        id: 5,
+        id: 4,
         title: "Croatian",
         imageSrc: "/hr.svg",
       },
@@ -75,19 +72,19 @@ const main = async () => {
         id: 3,
         unitId: 1, // Unit 1 (Learn the basics...)
         order: 3,
-        title: "Adjectives",
+        title: "Verbs",
       },
       {
         id: 4,
         unitId: 1, // Unit 1 (Learn the basics...)
         order: 4,
-        title: "Adverbs",
+        title: "Verbs",
       },
       {
         id: 5,
         unitId: 1, // Unit 1 (Learn the basics...)
         order: 5,
-        title: "Prepositions",
+        title: "Verbs",
       },
     ]);
 
@@ -207,11 +204,10 @@ const main = async () => {
         question: 'Which one of these is the "the robot"?',
       },
     ]);
-
-    console.log("Seeding Finished");
+    console.log("Seeding finished");
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to seed database");
+    throw new Error("Failed to seed the database");
   }
 };
 
