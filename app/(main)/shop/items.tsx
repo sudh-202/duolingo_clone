@@ -33,13 +33,13 @@ export const Items = ({
 
   const onUpgrade = () => {
     toast.loading("Redirecting to checkout...");
-    startTransition(() => {
-      createStripeUrl()
-        .then((response) => {
-          if (response.data) window.location.href = response.data;
-        })
-        .catch(() => toast.error("Something went wrong."));
-    });
+    // startTransition(() => {
+    //   createStripeUrl()
+    //     .then((response: { data: string; }) => {
+    //       if (response.data) window.location.href = response.data;
+    //     })
+    //     .catch(() => toast.error("Something went wrong."));
+    // });
   };
 
   return (
@@ -90,3 +90,7 @@ export const Items = ({
     </ul>
   );
 };
+
+function createStripeUrl() {
+    throw new Error("Function not implemented.");
+}
